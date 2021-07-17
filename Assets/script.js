@@ -1,19 +1,34 @@
-var ListInput = document.getElementById("segment");
+var ListInput = document.getElementById("#segment");
+var ListReturn = document.querySelector("#segment");
+var saveButton = document.querySelector("#SAVED")
 
 
 var Today = moment().format("LLL");
 $("#currentDay").text(Today);
 
-var three_before = moment.subtract(3, "h");
-$("#threebefore").text(three_before);
+renderToDo();
+//var three_before = moment.subtract(3, "h");
+//$("#threebefore").text(three_before);
 
-function saveToDo() {
-    var ToDoList = ListInput
 
-    localStorage.setItem("ToDoList");
-};
 
-saveButton.addEventlistener("click", function(event) {
+function renderToDo() {
+    var segment = localStorage.getItem("segment");
+      
+    if (!segment) {
+      return;
+    }
+      ListReturn.textContent = segment;
+  }
+  
+
+saveButton.addEventListener("click", function(event) {
     event.preventDefault();
-    saveToDo();
+    
+    var segment = document.querySelector("#segment").value;
+
+    localStorage.setItem("segment", segment);
+    
+    
+    renderToDo();
 })
